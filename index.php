@@ -81,9 +81,16 @@ function pesquisa($arquivo, $palavra) {
                         <div class="modal-header">
                             <a href="#" class="close" data-dismiss="modal">&times;</a>
                             <h3>Sobre</h3><br>
-                            Aplicativo desenvolvido para a disciplina de Inteligência Artificial, no curso de Licenciatura em Informática 2013/2 - FACOS<br>
-                            Acadêmicos: Alan Correa, Luis Carvalho<br>
-                            Professor: Andrio Pinto dos Santos<br>
+                           
+                                <strong><h4>Caminho Euleriano</h4></strong><br>
+                                Aplicativo desenvolvido para a disciplina de Inteligência Artificial<br>
+                                Licenciatura em Informática 2013/2 - FACOS<br>
+                                Acadêmicos: Alan Correa, Luis Carvalho<br>
+                                Professor: Andrio Pinto dos Santos<br>
+                            <hr>
+                            Este software está sob licença GPL V3<br>
+                            Veja em: http://www.gnu.org/licenses/
+                            
                         </div>
 
                         <div class="modal-footer">
