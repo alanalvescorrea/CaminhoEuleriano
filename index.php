@@ -1,6 +1,6 @@
 <?php
+/* ---------------------------FUNÇÃO PARA TESTAR SE O CAMINHO PERCORRIDO EXISTE NO TXT-------------------------------- */
 
-// retorna false se não achar ou retorna o numero da linha se achar
 function pesquisa($arquivo, $palavra) {
     $file = fopen($arquivo, 'r');
     $achou = false;
@@ -16,13 +16,9 @@ function pesquisa($arquivo, $palavra) {
 ?>
 
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
+        <!---------------------------COMEÇA SCRIPT DA LIGTH BOX 'SOBRE'-------------------------------- -->
         <script>
             $(document).ready(function() {
                 $('#windowTitleDialog').bind('show', function() {
@@ -39,6 +35,9 @@ and open the template in the editor.
             }
             ;
         </script>
+        <!---------------------------FIM SCRIPT DA LIGTH BOX 'SOBRE'-------------------------------- -->
+
+        <!---------------------------COMEÇA CSS DA LIGTH BOX 'SOBRE'-------------------------------- -->
         <style>
             .divDemoBody  {
                 width: 60%;
@@ -61,15 +60,18 @@ and open the template in the editor.
                 padding-top: 12px;
             }
         </style>
-        <!-- JQUERY --> <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> <script>window.jQuery || document.write('<script src="js/jquery-1.7.1.min.js"><\/script>')</script> <!-- TWITTER BOOTSTRAP CSS --> <link href="css/bootstrap.css" rel="stylesheet" type="text/css" /> <!-- TWITTER BOOTSTRAP JS --> <script src="js/bootstrap.min.js"></script>
+        <!---------------------------FIM CSS DA LIGTH BOX 'SOBRE'-------------------------------- -->
+
+        <!-- JQUERY --> 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> <script>window.jQuery || document.write('<script src="js/jquery-1.7.1.min.js"><\/script>')</script> 
+        <!-- TWITTER BOOTSTRAP CSS --> 
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" /> 
+        <!-- TWITTER BOOTSTRAP JS --> <script src="js/bootstrap.min.js"></script>
 
         <meta charset="UTF-8">
-
         <title></title>
     </head>
     <body>
-        <!--Sorry About the Heavy CSS But its neaded for the components make it external for quicker load time :) -->
-
         <div class="container">
             <div class="row">
                 <div class="span12 offset0 well-large">
@@ -105,47 +107,62 @@ and open the template in the editor.
                             nenhuma sequência que pudesse lhe levar a resolução encontrada pelo aluno. 
                             E você, concorda com esta professora? </p>
                         <p align="justify">Se você desconcorda com esta professora, tente!</p>
-                        <?php
-                        $hidden = $_POST['campo_hidden'];
 
+                        <?php
+                        /* ---------------------------TESTA SE FORMULÁRIO FOI ENVIADO-------------------------------- */
+                        $hidden = $_POST['campo_hidden'];
                         if ($hidden == 1) {
 
-                            /* ---------------------------REALIZANDO OS TESTES---------------------------------------- */
+                            $caminho1 = $_POST['1'];
+                            $caminho2 = $_POST['2'];
+                            $caminho3 = $_POST['3'];
+                            $caminho4 = $_POST['4'];
+                            $caminho5 = $_POST['5'];
+                            $caminho6 = $_POST['6'];
+                            $caminho7 = $_POST['7'];
+                            $caminho8 = $_POST['8'];
+                            $caminho9 = $_POST['9'];
+                            $caminho10 = $_POST['10'];
+                            $caminho11 = $_POST['11'];
 
-                            $caminho1 = mysql_real_escape_string(strtoupper($_POST['1']));
-                            $caminho2 = mysql_real_escape_string(strtoupper($_POST['2']));
-                            $caminho3 = mysql_real_escape_string(strtoupper($_POST['3']));
-                            $caminho4 = mysql_real_escape_string(strtoupper($_POST['4']));
-                            $caminho5 = mysql_real_escape_string(strtoupper($_POST['5']));
-                            $caminho6 = mysql_real_escape_string(strtoupper($_POST['6']));
-                            $caminho7 = mysql_real_escape_string(strtoupper($_POST['7']));
-                            $caminho8 = mysql_real_escape_string(strtoupper($_POST['8']));
-                            $caminho9 = mysql_real_escape_string(strtoupper($_POST['9']));
-                            $caminho10 = mysql_real_escape_string(strtoupper($_POST['10']));
-                            $caminho11 = mysql_real_escape_string(strtoupper($_POST['11']));
 
                             $soma_caminhos = $caminho1 + $caminho2 + $caminho3 + $caminho4 + $caminho5 + $caminho6 + $caminho7 + $caminho8 + $caminho9 + $caminho10 + $caminho11;
 
+                            /* ---------------------------EXIBE O CAMINHO PERCORRIDO-------------------------------- */
                             echo '<hr>Caminho percorrido: ' . $caminho1, $caminho2, $caminho3, $caminho4, $caminho5, $caminho6, $caminho7, $caminho8, $caminho9, $caminho10, $caminho11 . '<br>';
+
+                            /* ---------------------------EXIBE A SOMA DOS CAMINHOS PERCORRIDO---------------------- */
                             echo 'Soma dos caminhos: ' . $soma_caminhos . '<BR>';
+
+                            /* ---------------------------TESTA SE PRIMEIRO E ÚLTIMO CAMINHOS SÃO DIFERENTES-------------------------------- */
                             if ($caminho1 != $caminho11) {
+
+                                /* ---------------------------TESTA SE PRIMEIRO COMEÇA NO VERTICE 5 OU 6-------------------------------- */
                                 if ($caminho1 == 5 || $caminho1 == 6) {
+
+                                    /* ---------------------------TESTA SE ÚLTIMO COMEÇA NO VERTICE 5 OU 6-------------------------------- */
                                     if ($caminho11 == 5 || $caminho11 == 6) {
+
+                                        /* ---------------------------TESTA SE TODOS OS CAMINHOS SOMAM 41 PONTOS-------------------------------- */
                                         if ($soma_caminhos == 41) {
                                             $documento = "$caminho1$caminho2$caminho3$caminho4$caminho5$caminho6$caminho7$caminho8$caminho9$caminho10$caminho11\r\n";
 
-                                            //PESQUISA NO BANCO
+                                            /* ---------------------------USA A FUNÇÃO PESQUISA CADA LINHA DO ARQUIVO---------------- */
+                                            //compara linha com a o caminho informado, caso seja igual é atribuido a variável de comparação o valor de igual
                                             if ($linha = pesquisa('base_conhecimento.txt', $documento)) {
-                                                //echo 'Você acertou, mas essa resposta já está na base de conhecimento, na linha: ' . $linha;
                                                 $comparacao = 'igual';
                                             }
-                                            //TERMINA PESQUISA
+                                            /* ---------------------------TESTA O RESULTADO DA COMPARAÇÃO E GRAVA SE FOR DIFERENTE-------------------------------- */
                                             if (!$comparacao) {
-                                                //Agora atribuímos tudo para uma variável só.
+                                                //se a comparação de registro de uma linha do arquivo e caminho percorrido pelo usuário, então GRAVA
                                                 //Aqui você coloca o nome do arquivo que será gravado
+
+                                                /* ---------------------------GRAVAR TXT-------------------------------- */
+
+                                                //Nome do txt que contém a base de conhecimento
                                                 $arquivo = "base_conhecimento.txt";
 
-                                                //Abrimos o arquivo que será gravado.
+                                                //Abre arquivo que será gravado.
                                                 $abrir = fopen($arquivo, "a+", 0);
 
                                                 //Gravamos no arquivo
@@ -158,32 +175,32 @@ and open the template in the editor.
                                                 } else {
                                                     echo"<br>Não gravado!";
                                                 }
-                                            } else /* REGISTRO EXISTENTE NA BASE */ {
+                                            } else /* MENSAGEM DE REGISTRO EXISTENTE NA BASE */ {
                                                 echo '<br>';
                                                 echo '<span class="label label-warning">Você acertou, mas essa resposta já está na base de conhecimento, na linha: ' . $linha . '</span>';
                                                 echo '<br><br><a href="index.php">Ah não! Quero tentar novamente!</a>';
                                             }
-                                        } else /* SOMA DOS CAMINHOS DIFERENTE DE 41 */ {
+                                        } else /* MENSAGEM DE PARA A SOMA DOS CAMINHOS DIFERENTE DE 41 */ {
                                             echo '<br>';
                                             echo '<span class="label label-important">:( Ops, Não foi dessa vez!</span>';
                                             echo '<br><br><a href="index.php">Oba...quero jogar novamente!</a>';
                                         }
-                                    } else /* CAMINHO 11 NÃO COMEÇAM POR 5 E NEM POR 6 */ {
+                                    } else /* MENSAGEM DE PARA CAMINHO 11 QUE NÃO COMEÇA POR 5 E NEM POR 6 */ {
                                         echo '<br>';
                                         echo '<span class="label label-important">:( Ops, Não foi dessa vez!</span>';
                                         echo '<br><br><a href="index.php">Oba...quero jogar novamente!</a>';
                                     }
-                                } else /* CAMINHO 1 NÃO COMEÇAM POR 5 E NEM POR 6 */ {
+                                } else /* MENSAGEM PARA CAMINHO 1 QUE NÃO COMEÇAM POR 5 E NEM POR 6 */ {
                                     echo '<br>';
                                     echo '<span class="label label-important">:( Ops, não foi dessa vez!</span>';
                                     echo '<br><br><a href="index.php">Oba...quero jogar novamente!</a>';
                                 }
-                            } else /* CAMINHO 1 E 11 REPETEN */ {
+                            } else /* MENSAGEM PARA CAMINHO 1 E 11 REPETIDOS */ {
                                 echo '<br>';
                                 echo '<span class="label label-important">:( Ops, Há caminhos repetidos!</span>';
                                 echo '<br><br><a href="index.php">Oba...quero jogar novamente!</a>';
                             }
-                        } else /* else do $hidden == 1 */ {
+                        } else /* MENSAGEM DE TESTE DO CAMPO HIDDEN COM VALOR DIFERENTE DE 1 */ {
                             echo '<br>Vamos lá...tente!';
                         }
                         ?>
@@ -206,8 +223,6 @@ and open the template in the editor.
 
                         <br> <button type="submit" name="submit" class="btn btn-success">Enviar Solução</button>
                         <button type="reset" value="Reset!" class="btn btn-info">Limpar</button><br>
-
-
 
                     </form>    
                 </div>
